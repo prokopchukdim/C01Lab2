@@ -182,7 +182,7 @@ app.get("/getAllNotes", express.json(), async (req, res) => {
         return res.status(401).send("Unauthorized.");
       }
 
-      // Find note with given ID
+      // Find all notes for this user
       const collection = db.collection(COLLECTIONS.notes);
       const data = await collection.find({
         username: decoded.username,
@@ -212,7 +212,7 @@ app.delete("/deleteNote/:noteId", express.json(), async (req, res) => {
         return res.status(401).send("Unauthorized.");
       }
 
-      // Find note with given ID
+      // Find and delete note with given ID
       const collection = db.collection(COLLECTIONS.notes);
       const result = await collection.deleteOne({
         username: decoded.username,
@@ -256,7 +256,7 @@ app.patch("/editNote/:noteId", express.json(), async (req, res) => {
         return res.status(401).send("Unauthorized.");
       }
 
-      // Find note with given ID
+      // Find and update note with given ID
       const collection = db.collection(COLLECTIONS.notes);
 
       const filter = {
